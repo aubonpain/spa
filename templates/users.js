@@ -3,10 +3,7 @@ Users = new Meteor.Collection('users');
 if (Meteor.isClient) {
     Template.users.helpers({
         user: function () {
-            return {
-                goals: "wakawef123",
-                subGoals: "wakawef123 - suweb"
-            };
+            return Users.findOne()
         }
     });
 }
@@ -19,5 +16,5 @@ if (Meteor.isServer) {
 
 // Templates
 /*
-    Take portions of html and put it into a template
+ Take portions of html and put it into a template
  */
