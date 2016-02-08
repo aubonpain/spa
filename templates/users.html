@@ -1,5 +1,6 @@
 <template name="users">
     {{#with user}}
-        <h1>Hello <span>{{name.first}}</span> <span>{{name.last}}</span></h1>
+        <h2>Hello <span>{{name.first}}</span> <span>{{name.last}}</span></h2>
+        <h5>UserID: {{_id}}</h5>
     {{/with}}
 </template>

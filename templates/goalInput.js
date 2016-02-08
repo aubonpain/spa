@@ -7,21 +7,10 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             Goals.insert({
-                relatedUser: this._id,
+                relatedUser: "123123",
                 goal: goalText.value,
                 description: goalDescriptionText.value
             });
         }
     });
 }
-
-if (Meteor.isServer) {
-    Meteor.startup(function () {
-        // code to run on server at startup
-    });
-}
-
-// Templates
-/*
- Take portions of html and put it into a template
- */
