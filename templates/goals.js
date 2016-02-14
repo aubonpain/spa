@@ -13,6 +13,14 @@ if (Meteor.isClient) {
             return data;
         }
     });
+
+    Template.goals.events({
+        "click #removeGoal": function (e) {
+            e.preventDefault();
+
+            Meteor.call("deleteGoal", this._id);
+        }
+    })
 }
 
 if (Meteor.isServer) {
