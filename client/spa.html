@@ -2,22 +2,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>spsdfa</title>
+
 </head>
 
 <body>
-    {{> users}}
-    {{> goals}}
-    {{> goalInput}}
+    {{> loginButtons}}
+    {{#if currentUser}}
+        <!--{{> goalers}}-->
+        {{> goals}}
+        {{> goalInput}}
+    {{/if}}
 </body>
 
 
 
+<!--
 <template name="userHistory">
-    <!-- User History -->
+    &lt;!&ndash; User History &ndash;&gt;
     <h2>Last 5 goals:</h2>
     {{#each goals}}
         <p>{{goal}}</p>
     {{/each}}
     <p>pull subgoals</p>
 
-</template>
+</template>-->

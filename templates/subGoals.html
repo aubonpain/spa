@@ -1,6 +1,11 @@
 <template name="subGoals">
-    {{#with subGoals}}
-        <h1>Goasdfls!</h1>
-        <p>Subgoal:<span>{{subGoals}}</span></p>
-    {{/with}}
+
+        {{#each subGoals}}
+            <ul>
+                <li>
+                    <p><span>{{subGoal}}</span></p>
+                </li>
+            </ul>
+        {{/each}}
+
 </template>

@@ -7,7 +7,8 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             Goals.insert({
-                relatedUser: "123123",
+                owner: Meteor.userId(),
+                ownerName: Meteor.user().username,
                 goal: goalText.value,
                 description: goalDescriptionText.value
             });

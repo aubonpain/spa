@@ -1,6 +1,8 @@
 if (Meteor.isServer) {
     Meteor.startup(function () {
-        // code to run on server at startup
+
+
+        /*// code to run on server at startup
         if (Users.find().count() === 0) {
             Users.insert({
                 name: {
@@ -24,7 +26,7 @@ if (Meteor.isServer) {
                 subGoal: "SUBGOAL: Some crazy subGoal!",
                 description: "SUBGOAL_DESCKeep working at the crazy SUBGOAL until it's done!"
             });
-        }
+        }*/
     });
 }
 
