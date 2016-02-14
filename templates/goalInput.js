@@ -10,6 +10,7 @@ if (Meteor.isClient) {
                 owner: Meteor.userId(),
                 ownerName: Meteor.user().username,
                 goal: goalText.value,
+                goalDeadline: goalDeadline.value,
                 description: goalDescriptionText.value
             });
         }
