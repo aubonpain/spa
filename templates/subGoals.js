@@ -1,15 +1,14 @@
+SubGoals = new Meteor.Collection('subGoals');
+
+
 if (Meteor.isClient) {
-    Template.userDetails.helpers({
-        user: function () {
+    Template.subGoals.helpers({
+        subGoal: function () {
             return {
                 goals: "wakawef123",
-                subgoals: "wakawef123 - sub"
+                subGoals: "wakawef123 - suweb"
             };
         }
-    });
-
-    Template.userHistory.helpers({
-
     });
 }
 
@@ -22,5 +21,4 @@ if (Meteor.isServer) {
 // Templates
 /*
     Take portions of html and put it into a template
-    
  */

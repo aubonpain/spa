@@ -1,0 +1,11 @@
+<template name="goals">
+    <h3>Goals!</h3>
+    {{#each goals}}
+        <ul>
+            <li><h4>Goal: {{goal}}</h4></li>
+            <li><h5>Description: {{description}}</h5></li>
+            <br>
+            {{> subGoals}}
+        </ul>
+    {{/each}}
+</template>
