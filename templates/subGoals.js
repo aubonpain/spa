@@ -15,26 +15,6 @@ SubGoals = new Meteor.Collection('subGoals');
 
  */
 
-var addSubGoalFields = function () {
-    // Create the subgoal text, deadline, and description elements
-    var subGoalInput = document.createElement("input");
-    var subGoalStartInput = document.createElement("input");
-    var subGoalEndInput = document.createElement("input");
-    var subGoalDescriptionInput = document.createElement("input");
-    var removeSubGoal = document.createElement("button");
-    var addThisSubGoal = document.createElement("button");
-
-    // For the subgoal fields, we need to add the id
-    subGoalInput.setAttribute("id", "subGoal_" + this._id);
-    subGoalStartInput.setAttribute("id", "subGoalStart_" + this._id);
-    subGoalEndInput.setAttribute("id", "subGoalEnd_" + this._id);
-    subGoalDescriptionInput.setAttribute("id", "subGoalDescription_" + this._id);
-    removeSubGoal.setAttribute("id", "remove_" + this._id);
-    addThisSubGoal.setAttribute("id", "add_" + this._id);
-
-    // On clicking addThisSubGoal, we need to
-};
-
 Meteor.methods({
 
     addSubGoal: function (goalId, subGoal, subGoalDeadline, subGoalDescription) {
@@ -66,10 +46,7 @@ Meteor.methods({
 if (Meteor.isClient) {
     Template.subGoals.helpers({
         subGoal: function () {
-            return {
-                goals: "wakawef123",
-                subGoals: "wakawef123 - suweb"
-            };
+            return SubGoals.find({});
         }
     });
 
@@ -78,7 +55,7 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             // When this is clicked, we want to insert a field into the html
-            Meteor.call("addGoal", goal.value, goalDeadline.value, goalDescription.value);
+            Meteor.call("addSubGoal", this._id, goalDeadline.value, goalDescription.value);
         }
     });
 }

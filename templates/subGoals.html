@@ -1,11 +1,14 @@
 <template name="subGoals">
 
-        {{#each subGoals}}
-            <ul>
-                <li>
-                    <p><span>{{subGoal}}</span></p>
-                </li>
-            </ul>
-        {{/each}}
+    {{#each subGoal}}
+        <ul>
+            <li>
+                <input id="subGoal" type="text" />
+                <input id="subGoalStart" type="date" />
+                <input id="subGoalEnd" type="date" />
+                <input id="subGoalDescription" type="text" />
+            </li>
+        </ul>
+    {{/each}}
 
 </template>

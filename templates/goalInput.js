@@ -5,12 +5,12 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             Meteor.call("addGoal", goal.value, goalDeadline.value, goalDescription.value);
-        },
+        }
 
-        "click #addSubGoal": function (e) {
+        /*"click #addSubGoal": function (e) {
             e.preventDefault();
 
             Meteor.call("addSubGoalFields");
-        }
+        }*/
     });
 }
