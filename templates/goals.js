@@ -2,7 +2,7 @@ Goals = new Meteor.Collection('goals');
 
 Meteor.methods({
 
-    addGoal: function (goal, goalDeadline, goalDescription) {
+    addGoal: function (goal, goalStartDate, goalDeadline, goalDescription) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
@@ -11,6 +11,7 @@ Meteor.methods({
             owner: Meteor.userId(),
             ownerName: Meteor.user().username,
             goal: goal,
+            goalStartDate: goalStartDate,
             goalDeadline: goalDeadline,
             description: goalDescription
         });
@@ -22,8 +23,12 @@ Meteor.methods({
             throw new Meteor.Error("not-authorized");
         }
 
+        SubGoals.remove({
+            ownerId: goalId
+        });
+
         Goals.remove({
-            _id: goalId
+
         });
     }
 
@@ -35,7 +40,7 @@ if (Meteor.isClient) {
 
     Template.goals.helpers({
         goals: function () {
-            var data = Goals.find({ owner: Meteor.userId() });
+            var data = Goals.find({owner: Meteor.userId()});
             if (!data) {
                 return "Nothing to show here! :(";
             }
@@ -44,12 +49,45 @@ if (Meteor.isClient) {
     });
 
     Template.goals.events({
+
+        "click #addGoal": function (e) {
+            e.preventDefault();
+
+            Meteor.call("addGoal", goal.value, goalStartDate.value, goalDeadline.value, goalDescription.value);
+        },
+
         "click #removeGoal": function (e) {
             e.preventDefault();
 
             Meteor.call("deleteGoal", this._id);
         }
-    })
+
+        /*"click #addSubGoal": function (e) {
+         e.preventDefault();
+
+         // When this is clicked, we want to insert a blank record into the DB
+         // This will automatically display the sub goal fields on the page.
+         Meteor.call("addSubGoal",
+         this._id,
+         "Enter Sub Goal",
+         "",
+         "",
+         "Enter Sub Goal Description"
+         );
+         }*/
+    });
+
+    //if (Meteor.isClient) {
+
+
+    /*Template.goals.events({
+     "click #removeGoal": function (e) {
+     e.preventDefault();
+
+     Meteor.call("deleteGoal", this._id);
+     }
+     })*/
+
 }
 
 if (Meteor.isServer) {
@@ -64,6 +102,7 @@ if (Meteor.isServer) {
 
     });
 }
+
 
 // Templates
 /*

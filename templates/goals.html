@@ -1,13 +1,36 @@
 <template name="goals">
+
+    <h3>Enter GOAL:</h3>
+    <input id="goal" type="text" />
+    <input id="goalStartDate" type="date" />
+    <input id="goalDeadline" type="date" />
+    <input id="goalDescription" type="text" />
+    <input id="addGoal" type="submit" value="Add Goal" />
+
     <h3>Goals!</h3>
-    {{#each goals}}
-        <ul>
-            <li><h4>Goal: {{goal}}</h4></li>
-            <li><h4>Deadline: {{goalDeadline}}</h4></li>
-            <li><h5>Description: {{description}}</h5></li>
-            <input id="removeGoal" type="button" value="Remove this goal"/>
-            <br>
-            {{> subGoals}}
-        </ul>
-    {{/each}}
+
+    <table>
+        <tr>
+            <td><h3>Goal</h3></td>
+            <td><h3>Start Date</h3></td>
+            <td><h3>Deadline</h3></td>
+            <td><h3>Description</h3></td>
+            <td><h3>Goal ID</h3></td>
+        </tr>
+        {{#each goals}}
+            <tr>
+                <td>{{goal}}</td>
+                <td>{{goalStartDate}}</td>
+                <td>{{goalDeadline}}</td>
+                <td>{{description}}</td>
+                <td>{{_id}}</td>
+                <td><input id="removeGoal" type="button" value="Remove this goal"/></td>
+            </tr>
+
+            <tr>
+                {{> subGoals}}
+            </tr>
+
+        {{/each}}
+    </table>
 </template>

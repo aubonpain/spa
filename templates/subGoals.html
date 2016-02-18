@@ -1,14 +1,54 @@
 <template name="subGoals">
-
+    <p>Starting SUBGOALS Template for {{this._id}}</p>
+    <p>Subgoals:</p>
     {{#each subGoal}}
-        <ul>
-            <li>
-                <input id="subGoal" type="text" />
-                <input id="subGoalStart" type="date" />
-                <input id="subGoalEnd" type="date" />
-                <input id="subGoalDescription" type="text" />
-            </li>
-        </ul>
+        <table>
+            <tr id="{{_id}}">
+                <td id="ownerId" type="text">{{ownerId}}</td>
+                <td id="subGoal" type="text">{{subGoal}}</td>
+                <td id="subGoalStart" type="date">{{subGoalStartDate}}</td>
+                <td id="subGoalEnd" type="date">{{subGoalEndDate}}</td>
+                <td id="subGoalDescription" type="text">{{subGoalDescription}}</td>
+            <tr></tr>
+            </tr>
+        </table>
     {{/each}}
+
+    <input id="addNewSubGoal" type="button" value="Add NEW SUBGOAL to MAIN Goal id: {{this._id}}?" />
+    <br>
+
+    <table>
+        <form class="hidden">
+            <tr>
+                <td>
+                    User Id: <input id="userOwnerId" type="text" value="{{this.userId}}" readonly />
+                </td>
+                <td>
+                    Owner Goal Id: <input id="ownerGoalId" type="text" value="{{this._id}}" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Sub Goal: <input id="subGoal" type="text" value="{{subGoal}}" />
+                </td>
+                <td>
+                    Sub Goal Start Date: <input id="subGoalStart" type="date" value="{{subGoalStartDate}}" />
+                </td>
+                <td>
+                    Sub Goal End Date: <input id="subGoalEnd" type="date" value="{{subGoalEndDate}}" />
+                </td>
+                <td>
+                    Sub Goal Description: <input id="subGoalDescription" type="text" value="{{subGoalDescription}}" />
+                </td>
+                <td>
+                    <input id="updateSubGoal" type="button" value="Add Sub Goal to Main Goal" />
+                </td>
+
+            </tr>
+        </form>
+    </table>
+
+    <p>----- Ending SUBGOALS Template for {{this._id}}-----</p>
+
 
 </template>

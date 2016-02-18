@@ -1,5 +1,99 @@
 SubGoals = new Meteor.Collection('subGoals');
 
+Meteor.methods({
+
+    addSubGoal: function (owner, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
+        SubGoals.insert({
+            owner: owner,
+            subGoal: subGoal,
+            subGoalStartDate: subGoalStartDate,
+            subGoalEndDate: subGoalEndDate,
+            subGoalDescription: subGoalDescription
+        });
+    },
+
+    deleteSubGoal: function (subGoalId) {
+        // Make sure the user is logged in before deleting a sub-goal
+        if (! Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        SubGoals.remove({
+            _id: subGoalId
+        });
+    },
+
+    updateSubGoal: function (owningGoalId, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
+        SubGoals.update(
+            { ownerId: owningGoalId },
+            {
+                subGoal: subGoal,
+                subGoalStartDate: subGoalStartDate,
+                subGoalEndDate: subGoalEndDate,
+                subGoalDescription: subGoalDescription
+            }
+        );
+    }
+
+});
+
+if (Meteor.isClient) {
+
+    Meteor.subscribe("subGoals");
+
+    Template.subGoals.helpers({
+        subGoal: function () {
+            return SubGoals.find({
+                ownerId: this.userId // TODO: Need to insert main goal id here
+            });
+        }
+    });
+
+    Template.subGoals.events({
+        "click #addSubGoal": function (e) {
+            e.preventDefault();
+
+            // When this is clicked, we want to insert a blank record into the DB
+            // This will automatically display the sub goal fields on the page.
+            Meteor.call("addSubGoal",
+                        this.userId,
+                        "Enter Sub Goal",
+                        "",
+                        "",
+                        "Enter Sub Goal Description"
+            );
+        },
+
+        "click #updateSubGoal": function (e) {
+            e.preventDefault();
+
+            Meteor.call("updateSubGoal",
+                        name,
+                        subGoal.value,
+                        subGoalStartDate.value,
+                        subGoalEndDate.value,
+                        subGoalDescription.value
+            );
+        }
+    });
+}
+
+if (Meteor.isServer) {
+    Meteor.startup(function () {
+        // code to run on server at startup
+        Meteor.publish("subGoals", function () {
+            return SubGoals.find({
+                // ownerId: this._id
+            });
+        });
+    });
+}
+
+// Templates
+/*
+ Take portions of html and put it into a template
+ */
+
 /*
  TODO: Each subgoal may or may not have deadlines
 
@@ -15,58 +109,3 @@ SubGoals = new Meteor.Collection('subGoals');
 
  */
 
-Meteor.methods({
-
-    addSubGoal: function (goalId, subGoal, subGoalDeadline, subGoalDescription) {
-        // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
-            throw new Meteor.Error("not-authorized");
-        }
-        SubGoals.insert({
-            owner: goalId,
-            subGoal: subGoal,
-            subGoalDeadline: subGoalDeadline,
-            subGoalDescription: subGoalDescription
-        });
-    },
-
-    deleteAubGoal: function (subGoalId) {
-        // Make sure the user is logged in before deleting a sub-goal
-        if (! Meteor.userId()) {
-            throw new Meteor.Error("not-authorized");
-        }
-
-        SubGoals.remove({
-            _id: subGoalId
-        });
-    }
-
-});
-
-if (Meteor.isClient) {
-    Template.subGoals.helpers({
-        subGoal: function () {
-            return SubGoals.find({});
-        }
-    });
-
-    Template.subGoals.events({
-        "click #addSubGoal": function (e) {
-            e.preventDefault();
-
-            // When this is clicked, we want to insert a field into the html
-            Meteor.call("addSubGoal", this._id, goalDeadline.value, goalDescription.value);
-        }
-    });
-}
-
-if (Meteor.isServer) {
-    Meteor.startup(function () {
-        // code to run on server at startup
-    });
-}
-
-// Templates
-/*
-    Take portions of html and put it into a template
- */
