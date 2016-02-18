@@ -2,9 +2,10 @@ SubGoals = new Meteor.Collection('subGoals');
 
 Meteor.methods({
 
-    addSubGoal: function (owner, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
+    addSubGoal: function (userOwner, ownerGoalId, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
         SubGoals.insert({
-            owner: owner,
+            userOwner: userOwner,
+            ownerGoalId: ownerGoalId,
             subGoal: subGoal,
             subGoalStartDate: subGoalStartDate,
             subGoalEndDate: subGoalEndDate,
@@ -44,35 +45,29 @@ if (Meteor.isClient) {
     Template.subGoals.helpers({
         subGoal: function () {
             return SubGoals.find({
-                ownerId: this.userId // TODO: Need to insert main goal id here
+
             });
         }
     });
 
     Template.subGoals.events({
+        // Might not need "addNewSubGoal" implementation
+        "click #addNewSubGoal": function (e) {
+            e.preventDefault();
+
+            // document.getElementById("subGoalsInputForm").setAttribute("class", "");
+        },
+
         "click #addSubGoal": function (e) {
             e.preventDefault();
 
-            // When this is clicked, we want to insert a blank record into the DB
-            // This will automatically display the sub goal fields on the page.
             Meteor.call("addSubGoal",
-                        this.userId,
-                        "Enter Sub Goal",
-                        "",
-                        "",
-                        "Enter Sub Goal Description"
-            );
-        },
-
-        "click #updateSubGoal": function (e) {
-            e.preventDefault();
-
-            Meteor.call("updateSubGoal",
-                        name,
-                        subGoal.value,
-                        subGoalStartDate.value,
-                        subGoalEndDate.value,
-                        subGoalDescription.value
+                userOwnerId.value,
+                ownerGoalId.value,
+                subGoal.value,
+                subGoalStart.value,
+                subGoalEnd.value,
+                subGoalDescription.value
             );
         }
     });
@@ -83,7 +78,7 @@ if (Meteor.isServer) {
         // code to run on server at startup
         Meteor.publish("subGoals", function () {
             return SubGoals.find({
-                // ownerId: this._id
+                ownerGoalId: this._id
             });
         });
     });

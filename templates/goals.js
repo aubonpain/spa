@@ -24,11 +24,11 @@ Meteor.methods({
         }
 
         SubGoals.remove({
-            ownerId: goalId
+            ownerGoalId: goalId
         });
 
         Goals.remove({
-
+            _id: goalId
         });
     }
 
@@ -54,6 +54,9 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             Meteor.call("addGoal", goal.value, goalStartDate.value, goalDeadline.value, goalDescription.value);
+
+            // Clear the form
+            e.target.text.value = "";
         },
 
         "click #removeGoal": function (e) {
