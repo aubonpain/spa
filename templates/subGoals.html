@@ -2,17 +2,18 @@
     <p>Starting SUBGOALS Template for {{this._id}}</p>
     <p>Subgoals:</p>
     {{#each isOwner this._id}}
-        <label>For {{_id}}:</label>
+        <label>For Sub Goal ID: {{_id}}:</label>
         <ul>
-            <li>{{ownerGoalId}}</li>
-            <li>{{subGoal}}</li>
-            <li>{{subGoalStartDate}}</li>
-            <li>{{subGoalEndDate}}</li>
-            <li>{{subGoalDescription}}</li>
+            <li>Owner Goal Id: {{ownerGoalId}}</li>
+            <li>Sub Goal: {{subGoal}}</li>
+            <li>Sub Goal Start Date: {{subGoalStartDate}}</li>
+            <li>Sub Goal End Date: {{subGoalEndDate}}</li>
+            <li>Sub Goal Description: {{subGoalDescription}}</li>
         </ul>
+        <button id="removeSubGoal">Remove this Sub Goal</button>
     {{/each}}
 
-    <p>Add NEW SUBGOAL to '{{this.goal}}'?</p>
+    <p>Add NEW SUBGOAL to "{{this.goal}}"?</p>
     <br>
 
     <table>

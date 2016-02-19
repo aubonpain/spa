@@ -80,6 +80,12 @@ if (Meteor.isClient) {
                 subGoalEnd.value,
                 subGoalDescription.value
             );
+        },
+
+        "click #removeSubGoal": function (e) {
+            e.preventDefault();
+
+            Meteor.call("deleteSubGoal", this._id);
         }
     });
 }
@@ -101,17 +107,17 @@ if (Meteor.isServer) {
  */
 
 /*
- TODO: Each subgoal may or may not have deadlines
+ DONE: Each subgoal may or may not have deadlines
 
  TODO: Each subgoal has a COMPLETED checkbox
 
- TODO: To add a subgoal, the user clicks on an "Add Subgoal" button
+ DONE: To add a subgoal, the user clicks on an "Add Subgoal" button
 
- TODO: Clicking on "Add Subgoal" adds a subgoal with the related goal id
+ DONE: Clicking on "Add Subgoal" adds a subgoal with the related goal id
 
  TODO: On clicking COMPLETED, a CELEBRATION ensues (TODO: Define CELEBRATION)
 
- TODO: Each subgoal has a REMOVE button which removes the subgoal
+ DONE: Each subgoal has a REMOVE button which removes the subgoal
 
  */
 
