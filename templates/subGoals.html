@@ -1,11 +1,55 @@
 <template name="subGoals">
+    <p>Starting SUBGOALS Template for {{this._id}}</p>
+    <p>Subgoals:</p>
+    {{#each isOwner this._id}}
+        <label>For {{_id}}:</label>
+        <ul>
+            <li>{{ownerGoalId}}</li>
+            <li>{{subGoal}}</li>
+            <li>{{subGoalStartDate}}</li>
+            <li>{{subGoalEndDate}}</li>
+            <li>{{subGoalDescription}}</li>
+        </ul>
+    {{/each}}
 
-        {{#each subGoals}}
-            <ul>
-                <li>
-                    <p><span>{{subGoal}}</span></p>
-                </li>
-            </ul>
-        {{/each}}
+    <p>Add NEW SUBGOAL to '{{this.goal}}'?</p>
+    <br>
+
+    <table>
+        <form id="subGoalForm">
+            <tr>
+                <td>
+                    Owner Goal Id: <input id="ownerGoalId" type="text" value="{{this._id}}" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Sub Goal</label>
+                    <input id="subGoal" type="text" />
+                </td>
+                <td>
+                    <label>Sub Goal Description</label>
+                    <input id="subGoalDescription" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td><label>Sub Goal Start Date</label>
+                    <input id="subGoalStart" type="date" />
+                </td>
+                <td>
+                    <label>Sub Goal End Date</label>
+                    <input id="subGoalEnd" type="date" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="addSubGoal" type="submit" value="Add Sub Goal to {{this._id}}" />
+                </td>
+
+            </tr>
+        </form>
+    </table>
+    <br>
+    <p>----- Ending SUBGOALS TEMPLATE for {{this._id}}-----</p>
 
 </template>
