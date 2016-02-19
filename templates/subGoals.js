@@ -44,14 +44,6 @@ if (Meteor.isClient) {
     Meteor.subscribe("subGoals");
 
     Template.subGoals.helpers({
-        subGoal: function () {
-            var data = SubGoals.find({});
-            if (!data) {
-                return "Nothing to show here! :(";
-            }
-            return data;//return SubGoals.find({});
-        },
-
         isOwner: function (id) {
             var data = SubGoals.find({
                 ownerGoalId: id
@@ -64,21 +56,22 @@ if (Meteor.isClient) {
     });
 
     Template.subGoals.events({
-        "submit #subGoalForm": function (e) {
+        "submit #subGoalForm": function (e, template) {
             e.preventDefault();
 
             console.log(this._id,
-                subGoal.value,
-                subGoalStart.value,
-                subGoalEnd.value,
-                subGoalDescription.value);
+                template.find("#subGoal").value,
+                template.find("#subGoalStart").value,
+                template.find("#subGoalEnd").value,
+                template.find("#subGoalDescription").value
+            );
 
             Meteor.call("addSubGoal",
                 this._id,
-                subGoal.value,
-                subGoalStart.value,
-                subGoalEnd.value,
-                subGoalDescription.value
+                template.find("#subGoal").value,
+                template.find("#subGoalStart").value,
+                template.find("#subGoalEnd").value,
+                template.find("#subGoalDescription").value
             );
         },
 
