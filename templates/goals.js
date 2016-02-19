@@ -13,7 +13,8 @@ Meteor.methods({
             goal: goal,
             goalStartDate: goalStartDate,
             goalDeadline: goalDeadline,
-            description: goalDescription
+            description: goalDescription,
+            createdAt: new Date()
         });
     },
 
@@ -40,7 +41,7 @@ if (Meteor.isClient) {
 
     Template.goals.helpers({
         goals: function () {
-            var data = Goals.find({owner: Meteor.userId()});
+            var data = Goals.find({owner: Meteor.userId()}, {sort: {createdAt: -1}});
             if (!data) {
                 return "Nothing to show here! :(";
             }
@@ -54,9 +55,6 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             Meteor.call("addGoal", goal.value, goalStartDate.value, goalDeadline.value, goalDescription.value);
-
-            // Clear the form
-            e.target.text.value = "";
         },
 
         "click #removeGoal": function (e) {
@@ -64,33 +62,7 @@ if (Meteor.isClient) {
 
             Meteor.call("deleteGoal", this._id);
         }
-
-        /*"click #addSubGoal": function (e) {
-         e.preventDefault();
-
-         // When this is clicked, we want to insert a blank record into the DB
-         // This will automatically display the sub goal fields on the page.
-         Meteor.call("addSubGoal",
-         this._id,
-         "Enter Sub Goal",
-         "",
-         "",
-         "Enter Sub Goal Description"
-         );
-         }*/
     });
-
-    //if (Meteor.isClient) {
-
-
-    /*Template.goals.events({
-     "click #removeGoal": function (e) {
-     e.preventDefault();
-
-     Meteor.call("deleteGoal", this._id);
-     }
-     })*/
-
 }
 
 if (Meteor.isServer) {

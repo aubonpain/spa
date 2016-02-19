@@ -2,14 +2,15 @@ SubGoals = new Meteor.Collection('subGoals');
 
 Meteor.methods({
 
-    addSubGoal: function (userOwner, ownerGoalId, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
+    addSubGoal: function (ownerGoalId, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
         SubGoals.insert({
-            userOwner: userOwner,
+            userOwnerId: Meteor.userId(),
             ownerGoalId: ownerGoalId,
             subGoal: subGoal,
             subGoalStartDate: subGoalStartDate,
             subGoalEndDate: subGoalEndDate,
-            subGoalDescription: subGoalDescription
+            subGoalDescription: subGoalDescription,
+            createdAt: new Date()
         });
     },
 
@@ -44,26 +45,36 @@ if (Meteor.isClient) {
 
     Template.subGoals.helpers({
         subGoal: function () {
-            return SubGoals.find({
+            var data = SubGoals.find({});
+            if (!data) {
+                return "Nothing to show here! :(";
+            }
+            return data;//return SubGoals.find({});
+        },
 
+        isOwner: function (id) {
+            var data = SubGoals.find({
+                ownerGoalId: id
             });
+            if (!data) {
+                return "Nothing to show here! :(";
+            }
+            return data;
         }
     });
 
     Template.subGoals.events({
-        // Might not need "addNewSubGoal" implementation
-        "click #addNewSubGoal": function (e) {
+        "submit #subGoalForm": function (e) {
             e.preventDefault();
 
-            // document.getElementById("subGoalsInputForm").setAttribute("class", "");
-        },
-
-        "click #addSubGoal": function (e) {
-            e.preventDefault();
+            console.log(this._id,
+                subGoal.value,
+                subGoalStart.value,
+                subGoalEnd.value,
+                subGoalDescription.value);
 
             Meteor.call("addSubGoal",
-                userOwnerId.value,
-                ownerGoalId.value,
+                this._id,
                 subGoal.value,
                 subGoalStart.value,
                 subGoalEnd.value,
@@ -78,7 +89,7 @@ if (Meteor.isServer) {
         // code to run on server at startup
         Meteor.publish("subGoals", function () {
             return SubGoals.find({
-                ownerGoalId: this._id
+                userOwnerId: this.userId
             });
         });
     });
