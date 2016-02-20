@@ -59,13 +59,6 @@ if (Meteor.isClient) {
         "submit #subGoalForm": function (e, template) {
             e.preventDefault();
 
-            console.log(this._id,
-                template.find("#subGoal").value,
-                template.find("#subGoalStart").value,
-                template.find("#subGoalEnd").value,
-                template.find("#subGoalDescription").value
-            );
-
             Meteor.call("addSubGoal",
                 this._id,
                 template.find("#subGoal").value,
@@ -111,6 +104,16 @@ if (Meteor.isServer) {
  TODO: On clicking COMPLETED, a CELEBRATION ensues (TODO: Define CELEBRATION)
 
  DONE: Each subgoal has a REMOVE button which removes the subgoal
+
+ TODO: Subgoals can be edited
+
+ TODO: Subgoals have an edit button
+
+ TODO: On clicking Edit, the subgoal shows up as inputs that the user can then edit
+
+ TODO: On clicking Edit, a Save button also shows up with which the user saves changes
+
+ 
 
  */
 
