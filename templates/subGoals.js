@@ -10,7 +10,8 @@ Meteor.methods({
             subGoalStartDate: subGoalStartDate,
             subGoalEndDate: subGoalEndDate,
             subGoalDescription: subGoalDescription,
-            createdAt: new Date()
+            createdAt: new Date(),
+            beingEdited: false
         });
     },
 
@@ -35,6 +36,46 @@ Meteor.methods({
                 subGoalDescription: subGoalDescription
             }
         );
+    },
+
+    editSubGoal: function (id) {
+        // We want to make the subgoal editable
+        // We want to have a Save button
+        // We want to have a Cancel button
+        SubGoals.update(id,
+            {
+                $set: { beingEdited: true }
+            }
+        )
+    },
+
+    cancelEditSubGoal: function (id) {
+        // We want to make the subgoal editable
+        // We want to have a Save button
+        // We want to have a Cancel button
+        SubGoals.update(id,
+            {
+                $set: { beingEdited: false }
+            }
+        )
+    },
+
+    saveEditSubGoal: function (subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
+        // We want to make the subgoal editable
+        // We want to have a Save button
+        // We want to have a Cancel button
+        SubGoals.update(
+            this._id,
+            {
+                $set: {
+                    subGoal: subGoal,
+                    subGoalStartDate: subGoalStartDate,
+                    subGoalEndDate: subGoalEndDate,
+                    subGoalDescription: subGoalDescription,
+                    beingEdited: false
+                }
+            }
+        )
     }
 
 });
@@ -72,6 +113,28 @@ if (Meteor.isClient) {
             e.preventDefault();
 
             Meteor.call("deleteSubGoal", this._id);
+        },
+
+        "click #editSubGoal": function (e) {
+            e.preventDefault();
+
+            Meteor.call("editSubGoal", this._id);
+        },
+
+        "click #cancelEditSubGoal": function (e) {
+            //e.preventDefault();
+
+            Meteor.call("cancelEditSubGoal", this._id);
+        },
+
+        "click #saveEditSubGoal": function (e, template) {
+            e.preventDefault();
+
+            Meteor.call("saveEditSubGoal",
+                template.find("#subGoalEdit").value,
+                template.find("#subGoalStartEdit").value,
+                template.find("#subGoalEndEdit").value,
+                template.find("#subGoalDescriptionEdit").value);
         }
     });
 }
@@ -113,7 +176,9 @@ if (Meteor.isServer) {
 
  TODO: On clicking Edit, a Save button also shows up with which the user saves changes
 
- 
+ // Other framework stuff
+
+ TODO: Add divs for goals, subgoals, and measurements
 
  */
 
