@@ -60,12 +60,12 @@ Meteor.methods({
         )
     },
 
-    saveEditSubGoal: function (subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
+    saveEditSubGoal: function (id, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
         // We want to make the subgoal editable
         // We want to have a Save button
         // We want to have a Cancel button
         SubGoals.update(
-            this._id,
+            id,
             {
                 $set: {
                     subGoal: subGoal,
@@ -75,7 +75,7 @@ Meteor.methods({
                     beingEdited: false
                 }
             }
-        )
+        );
     }
 
 });
@@ -122,15 +122,12 @@ if (Meteor.isClient) {
         },
 
         "click #cancelEditSubGoal": function (e) {
-            //e.preventDefault();
-
             Meteor.call("cancelEditSubGoal", this._id);
         },
 
         "click #saveEditSubGoal": function (e, template) {
-            e.preventDefault();
-
             Meteor.call("saveEditSubGoal",
+                this._id,
                 template.find("#subGoalEdit").value,
                 template.find("#subGoalStartEdit").value,
                 template.find("#subGoalEndEdit").value,
