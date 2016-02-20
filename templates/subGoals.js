@@ -128,10 +128,10 @@ if (Meteor.isClient) {
         "click #saveEditSubGoal": function (e, template) {
             Meteor.call("saveEditSubGoal",
                 this._id,
-                template.find("#subGoalEdit").value,
-                template.find("#subGoalStartEdit").value,
-                template.find("#subGoalEndEdit").value,
-                template.find("#subGoalDescriptionEdit").value);
+                template.find("#subGoal" + this._id).value,
+                template.find("#subGoalStart" + this._id).value,
+                template.find("#subGoalEnd" + this._id).value,
+                template.find("#subGoalDescription" + this._id).value);
         }
     });
 }
