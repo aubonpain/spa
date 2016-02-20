@@ -27,10 +27,11 @@
             <label>For Sub Goal ID: {{_id}}:</label>
             <ul>
                 <li>Owner Goal Id: <input id="ownerGoalId" type="text" value="{{ownerGoalId}}" readonly /></li>
-                <li>Sub Goal: <input id="subGoalEdit" type="text" value="{{subGoal}}"/></li>
-                <li>Sub Goal Description: <input id="subGoalDescriptionEdit" type="text" value="{{subGoalDescription}}" /></li>
-                <li>Sub Goal Start Date: <input id="subGoalStartEdit" type="date" value="{{subGoalStartDate}}" /></li>
-                <li>Sub Goal End Date: <input id="subGoalEndEdit" type="date" value="{{subGoalEndDate}}" /></li>
+                <!-- We insert the {{_id}} into the id so that each subGoal is edited correctly -->
+                <li>Sub Goal: <input id="subGoal{{_id}}" type="text" value="{{subGoal}}"/></li>
+                <li>Sub Goal Description: <input id="subGoalDescription{{_id}}" type="text" value="{{subGoalDescription}}" /></li>
+                <li>Sub Goal Start Date: <input id="subGoalStart{{_id}}" type="date" value="{{subGoalStartDate}}" /></li>
+                <li>Sub Goal End Date: <input id="subGoalEnd{{_id}}" type="date" value="{{subGoalEndDate}}" /></li>
             </ul>
             <button id="saveEditSubGoal">Save</button>
             <button id="cancelEditSubGoal">Cancel</button>
