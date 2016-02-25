@@ -26,18 +26,6 @@ Meteor.methods({
         });
     },
 
-    updateSubGoal: function (owningGoalId, subGoal, subGoalStartDate, subGoalEndDate, subGoalDescription) {
-        SubGoals.update(
-            { ownerId: owningGoalId },
-            {
-                subGoal: subGoal,
-                subGoalStartDate: subGoalStartDate,
-                subGoalEndDate: subGoalEndDate,
-                subGoalDescription: subGoalDescription
-            }
-        );
-    },
-
     editSubGoal: function (id) {
         // We want to make the subgoal editable
         // We want to have a Save button

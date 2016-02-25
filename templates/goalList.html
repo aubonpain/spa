@@ -1,0 +1,36 @@
+<template name="goalList">
+
+    <h3>Current Goals!</h3>
+
+    <div class="goalList">
+
+
+        {{#each goals}}
+
+            <div class="goal">
+                <table>
+                    <tr>
+                        <td><h3>Goal</h3></td>
+                        <td><h3>Description</h3></td>
+                        <td><h3>Start Date</h3></td>
+                        <td><h3>Deadline</h3></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{goal}}</strong></td>
+                        <td>{{description}}</td>
+                        <td>{{goalStartDate}}</td>
+                        <td>{{goalDeadline}}</td>
+                        <td><input id="removeGoal" type="button" value="Remove this goal"/></td>
+                    </tr>
+                    <tr>
+                        {{> measurementDefinitionAdd }}
+                    </tr>
+                    <tr>
+                        {{> subGoals}}
+                    </tr>
+                </table>
+            </div>
+        {{/each}}
+
+    </div>
+</template>

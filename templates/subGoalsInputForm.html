@@ -1,0 +1,43 @@
+<template name="subGoalsInputForm">
+
+    <p>Add NEW SUBGOAL to "{{this.goal}}"?</p>
+    <br>
+
+    <form id="subGoalForm">
+        <table>
+            <tr>
+                <td>
+                    Owner Goal Id: <input id="ownerGoalId" type="text" value="{{this._id}}" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="subGoal" type="text" placeholder="Sub Goal"/>
+                </td>
+                <td>
+                    <input id="subGoalDescription" type="text" placeholder="Sub Goal Description" />
+                </td>
+            </tr>
+            <tr>
+                <td><label>Sub Goal Start Date</label>
+                    <input id="subGoalStart" type="date" />
+                </td>
+                <td>
+                    <label>Sub Goal End Date</label>
+                    <input id="subGoalEnd" type="date" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="addSubGoal" type="submit" value="Add Sub Goal to {{this._id}}" />
+                </td>
+
+            </tr>
+        </table>
+    </form>
+
+    <br>
+
+    <p>---- Ending {{this._id}}----</p>
+
+</template>

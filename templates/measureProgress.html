@@ -1,0 +1,15 @@
+<template name="measureProgress">
+    <p>---- {{this._id}} ----</p>
+    <p>Measurement:</p>
+    {{#each isOwner this._id}}
+        <br>
+        <br>
+        <ul>
+            <li>{{measureGoalNoun}}</li>
+            <li>{{measureGoalVerb}}</li>
+            <li>{{measureGoalPeriod}}</li>
+        </ul>
+
+    {{/each}}
+
+</template>

@@ -1,81 +1,90 @@
 <template name="subGoals">
-    <p>---- {{this._id}} ----</p>
-    <p>SUBGOALS:</p>
-    {{#each isOwner this._id}}
+
+    <div id="subGoals">
+
+        <p>SUBGOALS:</p>
+        {{#each isOwner this._id}}
+
+            <div class="subGoal">
+
+                <br>
+                <br>
+                {{#unless beingEdited}}
+                    <label>SUBGOALS LIST</label>
+                    <br>
+                    <br>
+                    <label>For Sub Goal ID: {{_id}}:</label>
+                    <ul>
+                        <li>Owner Goal Id: {{ownerGoalId}}</li>
+                        <li>Sub Goal: {{subGoal}}</li>
+                        <li>Sub Goal Description: {{subGoalDescription}}</li>
+                        <li>Sub Goal Start Date: {{subGoalStartDate}}</li>
+                        <li>Sub Goal End Date: {{subGoalEndDate}}</li>
+                        <li>Sub Goal Being Edited: {{beingEdited}}</li>
+                    </ul>
+                    <button id="removeSubGoal">Remove Sub Goal</button>
+                    <button id="editSubGoal">Edit Sub Goal</button>
+                {{/unless}}
+                {{#if beingEdited}}
+                    <label>SUBGOALS BEING EDITED!</label>
+                    <br>
+                    <br>
+                    <label>For Sub Goal ID: {{_id}}:</label>
+                    <ul>
+                        <li>Owner Goal Id: <input id="ownerGoalId" type="text" value="{{ownerGoalId}}" readonly /></li>
+                        <!-- We insert the {{_id}} into the id so that each subGoal is edited correctly -->
+                        <li>Sub Goal: <input id="subGoal{{_id}}" type="text" value="{{subGoal}}"/></li>
+                        <li>Sub Goal Description: <input id="subGoalDescription{{_id}}" type="text" value="{{subGoalDescription}}" /></li>
+                        <li>Sub Goal Start Date: <input id="subGoalStart{{_id}}" type="date" value="{{subGoalStartDate}}" /></li>
+                        <li>Sub Goal End Date: <input id="subGoalEnd{{_id}}" type="date" value="{{subGoalEndDate}}" /></li>
+                    </ul>
+                    <button id="saveEditSubGoal">Save</button>
+                    <button id="cancelEditSubGoal">Cancel</button>
+                {{/if}}
+
+            </div>
+
+        {{/each}}
+
+        <p>Add NEW SUBGOAL to "{{this.goal}}"?</p>
+
+        <form id="subGoalForm">
+            <table>
+                <tr>
+                    <td>
+                        Owner Goal Id: <input id="ownerGoalId" type="text" value="{{this._id}}" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="subGoal" type="text" placeholder="Sub Goal"/>
+                    </td>
+                    <td>
+                        <input id="subGoalDescription" type="text" placeholder="Sub Goal Description" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Sub Goal Start Date</label>
+                        <input id="subGoalStart" type="date" />
+                    </td>
+                    <td>
+                        <label>Sub Goal End Date</label>
+                        <input id="subGoalEnd" type="date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="addSubGoal" type="submit" value="Add Sub Goal to {{this._id}}" />
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+
         <br>
-        <br>
-        {{#unless beingEdited}}
-            <label>SUBGOALS LIST</label>
-            <br>
-            <br>
-            <label>For Sub Goal ID: {{_id}}:</label>
-            <ul>
-                <li>Owner Goal Id: {{ownerGoalId}}</li>
-                <li>Sub Goal: {{subGoal}}</li>
-                <li>Sub Goal Description: {{subGoalDescription}}</li>
-                <li>Sub Goal Start Date: {{subGoalStartDate}}</li>
-                <li>Sub Goal End Date: {{subGoalEndDate}}</li>
-                <li>Sub Goal Being Edited: {{beingEdited}}</li>
-            </ul>
-            <button id="removeSubGoal">Remove Sub Goal</button>
-            <button id="editSubGoal">Edit Sub Goal</button>
-        {{/unless}}
-        {{#if beingEdited}}
-            <label>SUBGOALS BEING EDITED!</label>
-            <br>
-            <br>
-            <label>For Sub Goal ID: {{_id}}:</label>
-            <ul>
-                <li>Owner Goal Id: <input id="ownerGoalId" type="text" value="{{ownerGoalId}}" readonly /></li>
-                <!-- We insert the {{_id}} into the id so that each subGoal is edited correctly -->
-                <li>Sub Goal: <input id="subGoal{{_id}}" type="text" value="{{subGoal}}"/></li>
-                <li>Sub Goal Description: <input id="subGoalDescription{{_id}}" type="text" value="{{subGoalDescription}}" /></li>
-                <li>Sub Goal Start Date: <input id="subGoalStart{{_id}}" type="date" value="{{subGoalStartDate}}" /></li>
-                <li>Sub Goal End Date: <input id="subGoalEnd{{_id}}" type="date" value="{{subGoalEndDate}}" /></li>
-            </ul>
-            <button id="saveEditSubGoal">Save</button>
-            <button id="cancelEditSubGoal">Cancel</button>
-        {{/if}}
-    {{/each}}
 
-    <p>Add NEW SUBGOAL to "{{this.goal}}"?</p>
-    <br>
+        <p>---- Ending {{this._id}}----</p>
 
-    <form id="subGoalForm">
-        <table>
-            <tr>
-                <td>
-                    Owner Goal Id: <input id="ownerGoalId" type="text" value="{{this._id}}" readonly />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input id="subGoal" type="text" placeholder="Sub Goal"/>
-                </td>
-                <td>
-                    <input id="subGoalDescription" type="text" placeholder="Sub Goal Description" />
-                </td>
-            </tr>
-            <tr>
-                <td><label>Sub Goal Start Date</label>
-                    <input id="subGoalStart" type="date" />
-                </td>
-                <td>
-                    <label>Sub Goal End Date</label>
-                    <input id="subGoalEnd" type="date" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input id="addSubGoal" type="submit" value="Add Sub Goal to {{this._id}}" />
-                </td>
-
-            </tr>
-        </table>
-    </form>
-
-    <br>
-
-    <p>---- Ending {{this._id}}----</p>
+    </div>
 
 </template>

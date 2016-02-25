@@ -1,5 +1,4 @@
-/*
-Goals = new Meteor.Collection('goals');
+//Goals = new Meteor.Collection('goals');
 
 Meteor.methods({
 
@@ -24,21 +23,13 @@ if (Meteor.isClient) {
 
     Meteor.subscribe('goals');
 
-    Template.goals.helpers({
+    Template.goalList.helpers({
         goals: function () {
             var data = Goals.find({owner: Meteor.userId()}, {sort: {createdAt: -1}});
             if (!data) {
                 return "Nothing to show here! :(";
             }
             return data;
-        },
-
-        measurementDefinition: function (id) {
-            var measurementDefinitionText = MeasureProgress.find({ownerGoalId: id});
-            if (!measurementDefinitionText) {
-                return "Nothing to show here! :(";
-            }
-            return measurementDefinitionText;
         }
     });
 
@@ -82,6 +73,6 @@ if (Meteor.isServer) {
 
 
 // Templates
-/!*
+/*
  Take portions of html and put it into a template
- *!/*/
+ */

@@ -8,7 +8,9 @@
 <body>
     {{> loginButtons}}
     {{#if currentUser}}
-        {{> goals}}
+        <!--{{> goals}}-->
+        {{> goalAdd }}
+        {{> goalList }}
     {{/if}}
 
     <p id="tempId"></p>
