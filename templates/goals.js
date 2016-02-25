@@ -1,6 +1,4 @@
 /*
-Goals = new Meteor.Collection('goals');
-
 Meteor.methods({
 
     deleteGoal: function (goalId) {

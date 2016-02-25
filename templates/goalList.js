@@ -33,22 +33,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.goals.events({
-
-        "click #addGoal": function (e) {
-            e.preventDefault();
-
-            Meteor.call("addGoal",
-                this._id,
-                goal.value,
-                goalStartDate.value,
-                goalDeadline.value,
-                goalDescription.value,
-                measurementNoun.value,
-                measurementVerb.value,
-                measurementPeriod.value
-            );
-        },
+    Template.goalList.events({
 
         "click #removeGoal": function (e) {
             e.preventDefault();
