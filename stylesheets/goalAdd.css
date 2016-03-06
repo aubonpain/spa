@@ -29,3 +29,11 @@
     width: auto;
     height: auto;
 }
+
+#measurementDefinitionAdd {
+    border-radius: 25px;
+    border: 2px solid #98AFC7;
+    padding: 10px;
+    width: auto;
+    height: auto;
+}

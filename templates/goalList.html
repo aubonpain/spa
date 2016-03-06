@@ -1,35 +1,59 @@
-<template name="goalList">
+    <template name="goalList">
 
-    <h3>Current Goals!</h3>
+        <p><strong>CURRENT GOALS:</strong></p>
 
     <div class="goalList">
 
-        {{#each goals}}
+    {{#each goals}}
 
-            <div class="goal">
-                <table>
-                    <tr>
-                        <td><h3>Goal</h3></td>
-                        <td><h3>Description</h3></td>
-                        <td><h3>Start Date</h3></td>
-                        <td><h3>Deadline</h3></td>
-                    </tr>
-                    <tr>
-                        <td><strong>{{goal}}</strong></td>
-                        <td>{{description}}</td>
-                        <td>{{goalStartDate}}</td>
-                        <td>{{goalDeadline}}</td>
-                        <td><input id="removeGoal" type="button" value="Remove this goal"/></td>
-                    </tr>
-                    <tr>
-                        {{> measurementDefinitionAdd }}
-                    </tr>
-                    <tr>
-                        {{> subGoals}}
-                    </tr>
-                </table>
-            </div>
+    <div class="goal">
+
+    {{#unless beingEdited}}
+
+        <h4>Goal ID {{_id}}:</h4>
+
+        <table>
+            <tr>
+                <td><h3>Goal</h3></td>
+                <td><h3>Description</h3></td>
+                <td><h3>Start Date</h3></td>
+                <td><h3>Deadline</h3></td>
+            </tr>
+            <tr>
+                <td><strong>{{goal}}</strong></td>
+                <td>{{description}}</td>
+                <td>{{goalStartDate}}</td>
+                <td>{{goalDeadline}}</td>
+                <td><input id="removeGoal" type="button" value="Remove this goal"/></td>
+                <td><input id="editGoal" type="button" value="Edit this goal"/></td>
+            </tr>
+
+            <tr>
+                {{> measurementDefinitionAdd }}
+            </tr>
+            <tr>
+                {{> subGoals}}
+            </tr>
+        </table>
+    {{/unless}}
+
+    {{#if beingEdited}}
+        <label>GOAL BEING EDITED!</label>
+        <br>
+        <br>
+        <label>For Goal ID: {{_id}}:</label>
+        <ul>
+            <!-- We insert the {{_id}} into the id so that each goal is edited correctly -->
+            <li>Goal: <input id="goal{{_id}}" type="text" value="{{goal}}"/></li>
+            <li>Goal Description: <input id="goalDescription{{_id}}" type="text" value="{{description}}" /></li>
+            <li>Goal Start Date: <input id="goalStart{{_id}}" type="date" value="{{goalStartDate}}" /></li>
+            <li>Goal End Date: <input id="goalEnd{{_id}}" type="date" value="{{goalDeadline}}" /></li>
+        </ul>
+        <button id="saveEditGoal">Save Goal</button>
+        <button id="cancelEditGoal">Cancel</button>
+    {{/if}}
+    </div>
         {{/each}}
 
-    </div>
-</template>
+        </div>
+        </template>

@@ -2,31 +2,26 @@
 
     <div id="subGoals">
 
-        <p>SUBGOALS:</p>
+        <p><strong>SUBGOALS:</strong></p>
         {{#each isOwner this._id}}
 
             <div class="subGoal">
-
-                <br>
-                <br>
                 {{#unless beingEdited}}
-                    <label>SUBGOALS LIST</label>
                     <br>
-                    <br>
-                    <label>For Sub Goal ID: {{_id}}:</label>
+                    <label>Sub Goal ID {{_id}}:</label>
                     <ul>
                         <li>Owner Goal Id: {{ownerGoalId}}</li>
                         <li>Sub Goal: {{subGoal}}</li>
                         <li>Sub Goal Description: {{subGoalDescription}}</li>
                         <li>Sub Goal Start Date: {{subGoalStartDate}}</li>
                         <li>Sub Goal End Date: {{subGoalEndDate}}</li>
-                        <li>Sub Goal Being Edited: {{beingEdited}}</li>
                     </ul>
+                    {{> measurementDefinitionAdd }}
                     <button id="removeSubGoal">Remove Sub Goal</button>
                     <button id="editSubGoal">Edit Sub Goal</button>
                 {{/unless}}
                 {{#if beingEdited}}
-                    <label>SUBGOALS BEING EDITED!</label>
+                    <label>SUBGOAL BEING EDITED!</label>
                     <br>
                     <br>
                     <label>For Sub Goal ID: {{_id}}:</label>

@@ -5,12 +5,15 @@
         {{#if measurementDefinitionExists this._id}}
             {{#each measurementDefinition this._id}}
                 {{#unless beingEdited}}
+                    <br>
                     <label>
-                        Measurement defined by: {{measurementNoun}} {{measurementVerb}} per {{measurementPeriod}}
+                        <strong>MEASUREMENT</strong> defined by: {{measurementNoun}} {{measurementVerb}} per {{measurementPeriod}}
                     </label>
                     <br>
                     <br>
                     <button id="editMeasurementDefinition">Edit Measurement Definition</button>
+                    <br>
+                    <br>
                 {{/unless}}
                 {{#if beingEdited}}
                     <label>How do you measure this goal? E.g. Steps Taken per Day, Books Read per Week, etc.</label>
