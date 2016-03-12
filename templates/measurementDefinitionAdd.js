@@ -2,7 +2,7 @@ MeasurementDefinition = new Meteor.Collection('measurementDefinition');
 
 Meteor.methods({
 
-    addMeasurementDefinition: function (ownerGoalId, measurementNoun, measurementVerb, measurementPeriod) {
+    addMeasurementDefinition: function (ownerGoalId, measurementNumber, measurementNoun, measurementVerb, measurementPeriod) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
@@ -10,6 +10,7 @@ Meteor.methods({
         MeasurementDefinition.insert({
             ownerGoalId: ownerGoalId,
             userOwnerId: Meteor.userId(),
+            measurementNumber: measurementNumber,
             measurementNoun: measurementNoun,
             measurementVerb: measurementVerb,
             measurementPeriod: measurementPeriod,
@@ -34,11 +35,12 @@ Meteor.methods({
         )
     },
 
-    saveEditMeasurementDefinition: function (id, measurementNoun, measurementVerb, measurementPeriod) {
+    saveEditMeasurementDefinition: function (id, measurementNumber, measurementNoun, measurementVerb, measurementPeriod) {
         MeasurementDefinition.update(
             id,
             {
                 $set: {
+                    measurementNumber: measurementNumber,
                     measurementNoun: measurementNoun,
                     measurementVerb: measurementVerb,
                     measurementPeriod: measurementPeriod,
@@ -77,6 +79,7 @@ if (Meteor.isClient) {
 
             Meteor.call("addMeasurementDefinition",
                 this._id,
+                template.find("#measurementNumber").value,
                 template.find("#measurementNoun").value,
                 template.find("#measurementVerb").value,
                 template.find("#measurementPeriod").value
@@ -96,6 +99,7 @@ if (Meteor.isClient) {
         "click #saveEditMeasurementDefinition": function (e, template) {
             Meteor.call("saveEditMeasurementDefinition",
                 this._id,
+                template.find("#measurementNumber" + this._id).value,
                 template.find("#measurementNoun" + this._id).value,
                 template.find("#measurementVerb" + this._id).value,
                 template.find("#measurementPeriod" + this._id).value

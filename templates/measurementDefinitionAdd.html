@@ -16,8 +16,9 @@
                     <br>
                 {{/unless}}
                 {{#if beingEdited}}
-                    <label>How do you measure this goal? E.g. Steps Taken per Day, Books Read per Week, etc.</label>
+                    <label>How are you going to measure this goal? E.g. 1000 Steps to be Taken per Day, 1 Book to be Read per Week, etc.</label>
                     <br>
+                    <input id="measurementNumber{{_id}}" type="text" value="{{measurementNumber}}" />
                     <input id="measurementNoun{{_id}}" type="text" value="{{measurementNoun}}" />
                     <input id="measurementVerb{{_id}}" type="text" value="{{measurementVerb}}" />
                     <select id="measurementPeriod{{_id}}">
@@ -35,6 +36,7 @@
         {{else}}
             <label>How do you measure this goal? E.g. Steps Taken per Day, Books Read per Week, etc.</label>
             <br>
+            <input id="measurementNumber" type="text" placeholder="E.g. 2000" />
             <input id="measurementNoun" type="text" placeholder="E.g. Steps" />
             <input id="measurementVerb" type="text" placeholder="E.g. Taken" />
             <select id="measurementPeriod">
